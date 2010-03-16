@@ -1,0 +1,18 @@
+Source: mueller
+Section: core
+Priority: optional
+Maintainer: Mikhail Gusarov <dottedmag@dottedmag.net>
+Build-Depends-Indep: dictfmt (>= 1.10.1), dictzip, python
+Build-Depends: debhelper (>= 5), quilt (>= 0.40)
+XCS-Cross-Host-Build-Depends: debhelper (>= 7), quilt (>= 0.40), dictfmt (>= 1.10.1), dictzip, python
+Standards-Version: 3.8.0
+
+Package: mueller7-dict
+Depends: ${misc:Depends}
+Provides: dictd-dictionary
+Architecture: all
+Description: Mueller English/Russian dictionary in dict format
+ Electronic version of the English/Russian dictionary by V. K. Mueller,
+ release 7.
+ .
+ This package contains the dictionary in dict format.

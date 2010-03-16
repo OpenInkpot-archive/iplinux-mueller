@@ -1,0 +1,213 @@
+mueller (2002.02.27-9) zelazny; urgency=low
+
+  * First build for IPlinux.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Tue, 16 Mar 2010 15:24:58 +0600
+
+mueller (2002.02.27-8) unstable; urgency=low
+
+  * debian/control:
+    - short description updated to make it more specific,
+    - ${misc:Depends} added, as suggested by Lintian.
+    - Standards-Version bumped to 3.8.0:
+      + debian/README.source added.
+  * Added quilt for patch management:
+    - fix-shopping.patch added,
+    - quilt added to Build-Depends,
+    - debian/rules adjusted.
+  * debian/copyright:
+    - changed (C) into ©, as suggested by Lintian.
+  * debian/watch:
+    - added empty watchfile to indicate missing upstream.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Tue, 17 Feb 2009 13:52:45 +0600
+
+mueller (2002.02.27-7) unstable; urgency=low
+
+  * mueller7-mova and mueller7accent-mova packages are dropped. If you're
+    still using mova, you're advised to migrate to dict server + dict
+    client as they provide better functionality.
+
+  * mueller7-dict and mueller7accent-dict now provide dictd-dictionary
+    virtual package (Closes: #466222)
+  * Copyright file updated to clarify information about copyright holders.
+  * 'Encoded in utf-8' is removed from packages' description.
+  * postinst and postrm maintainer scripts updated to force-reload dictd
+    instead of restarting it.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sun, 17 Feb 2008 16:10:32 +0600
+
+mueller (2002.02.27-6) unstable; urgency=low
+
+  * Dependencies cleaned up, using virtual packages dict-server and
+    dict-client.
+  * dict-server moved to Suggests, as mueller7-dict and
+    mueller7accent-dict may be used with OpenDict or OpenOffice.org.
+  * Added mueller7-dict.xml and mueller7accent-dict.xml as needed by
+    OpenDict (patch by Kęstutis Biliūnas) (Closes: #42592).
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Fri, 25 May 2007 22:53:01 +0700
+
+mueller (2002.02.27-5) unstable; urgency=low
+
+  * "The Unicode age" release
+
+  [ dict-server interaction ]
+  * Bumped dictd dependency to 1.10.2. This dictd version no longer
+    requres --locale=ru_RU.UTF-8 configuration
+  * Dropped all the debconf stuff from the package. No longer necessary
+    with new dictd (Closes: #388938)
+
+  [ dictionary ]
+  * Fixed broken 00-database-info entry (Closes: #250646)
+  * Fixed 'shop' entry in dictionary. (Closes: #263880)
+  * Transcription converted to IPA standard (Closes: #300831)
+  * Fixed indentation in dictionary entries. To achieve this 'mova->dict'
+    converter has been rewritten from scratch ('python' added to
+    Build-Depends, 'recode', 'locales' dropped from Build-Depends)
+
+  [ packaging ]
+  * Boilerplate comments removed from maintainer scripts
+  * '-mova' packages priority changed to 'extra' to match override file.
+  * Added lintian overrides: 'mueller*-mova' packages use binaries and
+    icons from 'mova' package.
+  * copyright file updated
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sat, 23 Sep 2006 13:40:08 +0700
+
+mueller (2002.02.27-4) unstable; urgency=low
+
+  * New maintainer. Thanks for your work, Yven!
+  * Acknowledging NMUs. Thanks, Mark and Christian! (Closes: #388019)
+
+  * Added ${misc:Depends} to Depends instead of debconf (>= 0.5). Brings
+    missing debconf-2.0 dependency (Closes: #332039)
+  * Previous upload also fixes postrm breakage, but does not mention bug
+    (Closes: #360367)
+  * Fixed lintian warnings about duplicate conffiles
+
+  * Added Czech translation. Thanks to Miroslav Kure (Closes: #308025)
+  * Added Vietnamese translation. Thanks to Clytie Siddall (Closes: #312986)
+  * Added Swedish translation. Thanks to Daniel Nylander (Closes: #341627)
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 21 Sep 2006 22:47:05 +0700
+
+mueller (2002.02.27-3.3) unstable; urgency=low
+
+  * NMU
+  * Bump dictfmt dependency to use --utf8 option
+  * Bump standards version to 3.7.2
+  * Move debhelper dependency to Build-Depends as lintian suggests
+  * Cleaning up debian/rules:
+    - Unused garbage left from template file removed
+    - do not chmod to-dict.sh to avoid dpkg-source warning
+  * to-dict.sh updated to produce correct indexes (Closes: #318070, #186496)
+    - locale/ is no longer needed
+  * fixed typos in changelog dates to avoid lintian warnings
+  * postrm fixed to make package purging work again
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sun, 17 Sep 2006 16:56:28 +0700
+
+mueller (2002.02.27-3.2) unstable; urgency=low
+
+  * Non-maintainer upload
+  * Correct templates to mention the dictionary is English-Russian
+    Closes: #236774, #239746
+  * Lower priority of the debconf notes displayed when the locale
+    is non UTF-8. Closes: #283648
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 30 Nov 2004 15:02:05 +0100
+
+mueller (2002.02.27-3.1) unstable; urgency=low
+
+  * NMU
+  * Make debian/scripts/to-dict.sh executable. Patch by Goswin von Brederlow
+    <brederlo@informatik.uni-tuebingen.de>, Thanks! (Closes: #238071)
+  * debian/*menu: Added some quotes to fix some lintian warnings.
+  * Translations:
+    + Updated the french debconf translations (Closes: #237192)
+
+ -- Marc 'HE' Brockschmidt <he@debian.org>  Sat,  1 May 2004 13:52:08 +0200
+
+mueller (2002.02.27-3) unstable; urgency=low
+
+  * Changed packaging to include an orig.tar.gz.
+  * Improved descriptions grammar-wise.
+  * Adapted and slightly improved locale detection and debconf stuff from
+    dict-de-en. (Closes: #235111)
+  * Added locales to Build-Depends-Indep. (Closes: #235083)
+  * Added dictd and debconf to Depends.
+ 
+ -- Yven Johannes Leist <leist@beldesign.de>  Fri,  5 Mar 2004 03:45:29 +0100
+
+mueller (2002.02.27-2) unstable; urgency=low
+
+  * Applied patch from Bob Hilliard <hilliard@debian.org> to convert the
+    dictionary to utf8. This fixes the problem of dictfmt refusing to
+    build under a non utf8 locale. (Closes: #191206)
+
+ -- Yven Johannes Leist <leist@beldesign.de>  Tue, 24 Feb 2004 18:44:02 +0100
+  
+mueller (2002.02.27-1) unstable; urgency=low
+
+  * New Maintainer. (Closes: #136812)
+
+ -- Yven Johannes Leist <leist@beldesign.de>  Wed, 24 Apr 2002 11:00:26 +0200
+
+mueller (2002.02.27) unstable; urgency=low
+
+  * Add conffiles. (Closes: #132815)
+  * Changing maintainer to Debian QA Group, since the former maintainer
+    orphaned it.
+
+ -- David Starner <dvdeug@debian.org>  Wed, 27 Feb 2002 12:18:08 -0600
+
+mueller (2001.12.29) unstable; urgency=low
+
+  * Spelling errors fixed. (Closes: #125161, #125162, #125163, #125164)
+  * -dict packages don't depend on dictd now (Closes: #96434)
+
+ -- Peter Novodvorsky <nidd@debian.org>  Sat, 29 Dec 2001 17:49:45 +0300
+
+mueller (2001.09.05) unstable; urgency=low
+
+  * Fixed database info header, 3(C) included, abbr. list excluded
+  * Abbreviations as plain vocabulae, not in db header
+  * Fixed sorting order, words out of sort invisible
+  * All those (C) Oleg P. Philon, thanks Oleg. ;-)
+
+ -- Peter Novodvorsky <nidd@debian.org>  Wed, 5 Sep 2001 20:16:34 +0300
+
+mueller (2001.04.11) unstable; urgency=low
+
+  * Fixed description of mueller7-mova. (Closes: #92434)
+
+ -- Peter Novodvorsky <nidd@debian.org>  Wed, 11 Apr 2001 19:58:12 +0400
+
+mueller (2001.02.05) unstable; urgency=low
+
+  * Include menu and config files to be compatible with new mova.
+  * Dictionary without accents added.
+  * Restarting dictd in postinst and and postrm of *-dict.
+
+ -- Peter Novodvorsky <nidd@debian.org>  Tue,  6 Feb 2001 05:23:42 +0300
+
+mueller (2001.02.01) unstable; urgency=low
+
+  * Running dictdconfig and restarting dictd in postinst.
+
+ -- Peter Novodvorsky <nidd@debian.org>  Thu,  1 Feb 2001 23:27:22 +0300
+
+mueller (2001.01.31) unstable; urgency=low
+
+  * Splitted mova and mueller in two source packages, because Mueller's 
+  dictionary don't  have version.
+  * New mueller-dict package for dictd service.
+
+ -- Peter Novodvorsky <nidd@debian.org>  Wed, 31 Jan 2001 03:57:48 +0300
+
+mueller (3.3-1) unstable; urgency=low
+
+  * Initial version.
+
+ -- Peter Novodvorsky <nidd@debian.org>  Fri,  1 Sep 2000 19:38:11 +0400

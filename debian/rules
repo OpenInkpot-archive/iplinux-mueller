@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+include /usr/share/quilt/quilt.make
+
+DICT_URL="http://www.chat.ru/~mueller_dic"
+DICT_NAME="Mueller English-Russian Dictionary"
+
+build: build-stamp
+
+build-stamp: debian/stamp-patched
+	dh_testdir
+
+	python debian/scripts/to-dict.py < Mueller7GPL.koi > mueller7.data
+	echo "Creating mueller7.dict and mueller7.index"
+	dictfmt -p --allchars --utf8 --columns 0 -u ${DICT_URL} -s ${DICT_NAME} mueller7 < mueller7.data
+	echo "Compressing mueler7.dict"
+	dictzip mueller7.dict
+
+	touch build-stamp
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+
+	-rm -f *.dict.dz *.index *.data
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+
+	dh_installdirs
+	dh_install
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_link
+	dh_compress
+	dh_installdeb
+	dh_gencontrol
+	dh_builddeb
+
+binary-arch: build install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install
